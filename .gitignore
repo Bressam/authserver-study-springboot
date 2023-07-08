@@ -2,3 +2,4 @@ spring.log
 build
 .idea
 .gradle
+*.log.*.gz
