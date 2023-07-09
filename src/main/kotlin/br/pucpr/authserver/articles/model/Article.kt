@@ -17,5 +17,5 @@ class Article(
     @Column(nullable = false)
     var content: String
 ) {
-    fun toResponse() = ArticleResponse(title, subtitle, content)
+    fun toResponse() = ArticleResponse(id!!, title, subtitle, content)
 }

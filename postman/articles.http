@@ -11,3 +11,7 @@ Authorization: Bearer {{token}}
   "subtitle": "optional subtitle",
   "content": "Article content"
 }
+
+### Deletes the article by ID
+DELETE localhost:8080/api/articles/2
+Authorization: Bearer {{token}}
