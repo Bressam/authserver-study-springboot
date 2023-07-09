@@ -3,6 +3,7 @@ package br.pucpr.authserver.security
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.security.SecurityScheme
 import jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
@@ -40,7 +41,9 @@ class SecurityConfig(private val jwtTokenFilter: JwtTokenFilter) {
                     .requestMatchers(HttpMethod.GET).permitAll()
                     .requestMatchers("/error/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/users", "/users/login").permitAll()
-                    .requestMatchers("/h2-console/**").permitAll()
+                    .requestMatchers("/api/h2-console/**").permitAll()
+                    // Needed since spring security still blocks H2 console with above requestMatcher
+                    .requestMatchers(toH2Console()).permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtTokenFilter, BasicAuthenticationFilter::class.java)
