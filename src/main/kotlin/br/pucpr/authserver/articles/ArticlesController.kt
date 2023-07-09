@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 @RestController
@@ -32,6 +34,13 @@ class ArticlesController(private val service: ArticlesService) {
 
         val date =  LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE) ?: null
         return service.findAll(date = date).map { it.toResponse() }
+    }
+
+    @GetMapping("/today")
+    @PreAuthorize("permitAll()")
+    @SecurityRequirement(name = "AuthServer")
+    fun listTodayArticles(): List<ArticleResponse> {
+        return service.findAll(date = LocalDate.now(ZoneOffset.UTC)).map { it.toResponse() }
     }
 
     @Transactional
