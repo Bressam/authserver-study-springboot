@@ -18,10 +18,10 @@ class Article(
     var title: String,
 
     @Column(length = 240)
-    var subtitle: String,
+    var subtitle: String? = null,
 
     @Column(nullable = false)
     var content: String
 ) {
-    fun toResponse() = ArticleResponse(id!!, date, title, subtitle, content)
+    fun toResponse() = ArticleResponse(id!!, date, title, subtitle ?: "", content)
 }

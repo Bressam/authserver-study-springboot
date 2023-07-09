@@ -47,5 +47,7 @@ class ArticlesController(private val service: ArticlesService) {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @SecurityRequirement(name = "AuthServer")
-    fun delete(@PathVariable("id") id: Long): ResponseEntity<Void> = ResponseEntity.ok().build()
+    fun delete(@PathVariable("id") id: Long): ResponseEntity<Void> =
+        if (service.delete(id)) ResponseEntity.ok().build()
+        else ResponseEntity.notFound().build()
 }
