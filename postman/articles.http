@@ -1,0 +1,13 @@
+### List Articles
+GET localhost:8080/api/articles
+
+### Create Article
+POST localhost:8080/api/articles
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Article title",
+  "subtitle": "optional subtitle",
+  "content": "Article content"
+}

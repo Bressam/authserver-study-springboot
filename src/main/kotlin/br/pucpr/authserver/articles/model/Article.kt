@@ -1,9 +1,7 @@
-package br.pucpr.authserver.articles
+package br.pucpr.authserver.articles.model
 
-import br.pucpr.authserver.users.Role
-import br.pucpr.authserver.users.responses.UserResponse
+import br.pucpr.authserver.articles.responses.ArticleResponse
 import jakarta.persistence.*
-import jakarta.validation.constraints.Email
 
 @Entity
 class Article(
@@ -17,5 +15,7 @@ class Article(
     var subtitle: String,
 
     @Column(nullable = false)
-    var content: String = ""
-)
+    var content: String
+) {
+    fun toResponse() = ArticleResponse(title, subtitle, content)
+}
