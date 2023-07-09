@@ -1,6 +1,9 @@
 ### List Articles
 GET localhost:8080/api/articles
 
+### List Articles from Date
+GET localhost:8080/api/articles?fromDate=2023-07-09
+
 ### Create Article
 POST localhost:8080/api/articles
 Content-Type: application/json

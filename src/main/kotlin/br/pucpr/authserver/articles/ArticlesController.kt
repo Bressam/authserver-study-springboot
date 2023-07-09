@@ -1,18 +1,22 @@
 package br.pucpr.authserver.articles
 
 import br.pucpr.authserver.articles.requests.ArticleRequest
+import br.pucpr.authserver.articles.responses.ArticleResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @RestController
 @RequestMapping("/articles")
-class ArticlesController() {
+class ArticlesController(private val service: ArticlesService) {
     @Operation(
         summary = "List all articles",
         parameters = [
@@ -23,15 +27,20 @@ class ArticlesController() {
             )]
     )
     @GetMapping
-    fun listArticles(@RequestParam("fromDate") role: String?): ResponseEntity<String> {
-        return ResponseEntity.ok("list")
+    fun listArticles(@RequestParam("fromDate") dateString: String?): List<ArticleResponse> {
+        if (dateString == null) { return service.findAll().map { it.toResponse() }}
+
+        val date =  LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE) ?: null
+        return service.findAll(date = date).map { it.toResponse() }
     }
 
     @Transactional
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    fun createArticle(@Valid @RequestBody req: ArticleRequest): ResponseEntity<ArticleRequest> {
-        return ResponseEntity.ok(req)
+    fun createArticle(@Valid @RequestBody req: ArticleRequest): ResponseEntity<ArticleResponse> {
+        return service.save(req)
+            .toResponse()
+            .let { ResponseEntity.status(HttpStatus.CREATED).body(it) }
     }
 
 
