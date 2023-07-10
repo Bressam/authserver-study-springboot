@@ -8,6 +8,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 @Service
 class ArticlesService(private val repository: ArticlesRepository) {
@@ -22,9 +23,20 @@ class ArticlesService(private val repository: ArticlesRepository) {
         return repository.save(article)
     }
 
-    fun findAll(date: LocalDate? = null): List<Article> =
-        if (date == null) repository.findAll(Sort.by("date"))
-        else repository.findAllByDate(date = date)
+    fun findAll(dateString: String? = null, requestSortBy: String? = null): List<Article> {
+        val sortBy = requestSortBy ?: "date"
+        if (dateString == null || (LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE) ?: null) == null) {
+            return repository.findAll(Sort.by(sortBy))
+        }
+
+        val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE) ?: null
+        if (date == null) {
+            return repository.findAll(Sort.by(sortBy))
+        } else {
+            return repository.findAllByDate(date, Sort.by(sortBy))
+        }
+    }
+
 
     fun delete(id: Long): Boolean {
         val article = repository.findByIdOrNull(id) ?: return false

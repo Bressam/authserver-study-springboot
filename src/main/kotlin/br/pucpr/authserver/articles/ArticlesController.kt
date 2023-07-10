@@ -13,7 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 
 @RestController
 @RequestMapping("/articles")
@@ -28,18 +27,16 @@ class ArticlesController(private val service: ArticlesService) {
             )]
     )
     @GetMapping
-    fun listArticles(@RequestParam("fromDate") dateString: String?): List<ArticleResponse> {
-        if (dateString == null) { return service.findAll().map { it.toResponse() }}
-
-        val date =  LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE) ?: null
-        return service.findAll(date = date).map { it.toResponse() }
+    fun listArticles(@RequestParam("fromDate") dateString: String?,
+                     @RequestParam("sortedBy") sortedBy: String?): List<ArticleResponse> {
+        return service.findAll(dateString, sortedBy).map { it.toResponse() }
     }
 
     @GetMapping("/today")
     @PreAuthorize("permitAll()")
     @SecurityRequirement(name = "AuthServer")
     fun listTodayArticles(): List<ArticleResponse> {
-        return service.findAll(date = LocalDate.now(ZoneOffset.UTC)).map { it.toResponse() }
+        return service.findAll(LocalDate.now(ZoneOffset.UTC).toString()).map { it.toResponse() }
     }
 
     @Transactional
