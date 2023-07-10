@@ -1,0 +1,29 @@
+### List Articles
+GET localhost:8080/api/articles
+
+### List Articles from Date
+GET localhost:8080/api/articles?fromDate=2023-07-10
+
+### Lists today's articles
+GET localhost:8080/api/articles/today
+
+### List Articles with sorting
+GET localhost:8080/api/articles?sortBy=content
+
+### List Articles from Date + sorting
+GET localhost:8080/api/articles?fromDate=2023-07-10&sortBy=content
+
+### Create Article
+POST localhost:8080/api/articles
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Article title",
+  "subtitle": "optional subtitle",
+  "content": "Article content"
+}
+
+### Deletes the article by ID
+DELETE localhost:8080/api/articles/5
+Authorization: Bearer {{token}}

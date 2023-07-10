@@ -2,7 +2,7 @@ package br.pucpr.authserver.users
 
 import br.pucpr.authserver.exception.BadRequestException
 import br.pucpr.authserver.security.Jwt
-import br.pucpr.authserver.users.Stubs.userStub
+import br.pucpr.authserver.Stubs.userStub
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.throwable.shouldHaveMessage
