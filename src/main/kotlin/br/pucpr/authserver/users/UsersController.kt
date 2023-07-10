@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/users")
 class UsersController(val service: UsersService) {
     @Operation(
-        summary = "Lista todos os usuários",
+        summary = "Lists all users",
         parameters = [
             Parameter(
                 name = "role",
-                description = "Papel a ser usado no filtro (opcional)",
-                example = "USER"
+                description = "User's role to be used as filter (optional)",
+                example = "WRITER"
             )]
     )
     @GetMapping

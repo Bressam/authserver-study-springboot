@@ -1,7 +1,7 @@
-### Listar usuários
+### List users
 GET localhost:8080/api/users
 
-### Cadastra um usuário
+### Create user
 POST localhost:8080/api/users
 Content-Type: application/json
 
@@ -11,14 +11,14 @@ Content-Type: application/json
   "password": "password"
 }
 
-### Lista o usuário 2
+### List user by id
 GET localhost:8080/api/users/2
 
-### Lista o próprio usuário
+### List current logged in user
 GET localhost:8080/api/users/me
 Authorization: Bearer {{token}}
 
-### Login
+### Login as usual user
 POST localhost:8080/api/users/login
 Content-Type: application/json
 
@@ -31,7 +31,7 @@ Content-Type: application/json
     client.global.set("id", response.body.user.id)
 %}
 
-### Login com admin
+### Login as admin user
 POST localhost:8080/api/users/login
 Content-Type: application/json
 
@@ -44,7 +44,7 @@ Content-Type: application/json
     client.global.set("id", response.body.user.id)
 %}
 
-### Exclui o usuário
+### Deletes user
 DELETE localhost:8080/api/users/2
 Authorization: Bearer {{token}}
 
