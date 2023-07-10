@@ -11,8 +11,10 @@ class UsersBootstrap(
 ) : ApplicationListener<ContextRefreshedEvent> {
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
         val adminRole = Role(name = "ADMIN")
+        val writerRole = Role(name = "WRITER")
         if (rolesRepository.count() == 0L) {
             rolesRepository.save(adminRole)
+            rolesRepository.save(writerRole)
             rolesRepository.save(Role(name = "USER"))
         }
         if (userRepository.count() == 0L) {
@@ -22,6 +24,7 @@ class UsersBootstrap(
                 name = "Auth Server Administrator",
             )
             admin.roles.add(adminRole)
+            admin.roles.add(writerRole)
             userRepository.save(admin)
         }
     }

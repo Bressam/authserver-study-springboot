@@ -1,0 +1,56 @@
+### List Articles lists
+GET localhost:8080/api/articlesLists
+
+### List Articles list by id
+GET localhost:8080/api/articlesLists/2
+
+#### List ARticles list by name
+GET localhost:8080/api/articlesLists/
+
+### Update Articles list articles
+PATCH localhost:8080/api/articlesLists/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "articles":[
+    {
+      "id": 7,
+      "date": "2023-06-30",
+      "title": "Article 2: article title",
+      "subtitle": "This is article 2 brief explanation",
+      "content": "Content data of article 2. Article 2 explores the issues regarding the problems without solutions on current days",
+      "articlesList": null
+    },
+    {
+      "id": 5,
+      "date": "2023-07-10",
+      "title": "Article 5: article title",
+      "subtitle": null,
+      "content": "Content data of article 5. Article 5 explores the issues regarding the problems without solutions on current days",
+      "articlesList": null
+    }
+  ]
+}
+
+### Update Articles list name
+PATCH localhost:8080/api/articlesLists/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+  {
+    "name": "Read later 5"
+  }
+
+### Creates Articles List
+POST localhost:8080/api/articlesLists
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+  {
+    "name": "Read later 2"
+  }
+
+### Deletes the articles list by ID
+DELETE localhost:8080/api/articlesLists/3
+Authorization: Bearer {{token}}
