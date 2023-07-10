@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
 @Repository
-interface ArticlesRepository : JpaRepository<Article, Long> {
+interface ArticlesRepository: JpaRepository<Article, Long> {
     fun findAllByDate(date: LocalDate): List<Article>
 }

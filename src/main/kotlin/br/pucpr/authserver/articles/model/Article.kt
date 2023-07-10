@@ -1,6 +1,8 @@
 package br.pucpr.authserver.articles.model
 
 import br.pucpr.authserver.articles.responses.ArticleResponse
+import br.pucpr.authserver.articleslist.model.ArticlesList
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
@@ -21,7 +23,11 @@ class Article(
     var subtitle: String? = null,
 
     @Column(nullable = false)
-    var content: String
+    var content: String,
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "articles")
+    val articlesList: MutableSet<ArticlesList> = mutableSetOf()
 ) {
     fun toResponse() = ArticleResponse(id!!, date, title, subtitle ?: "", content)
 }

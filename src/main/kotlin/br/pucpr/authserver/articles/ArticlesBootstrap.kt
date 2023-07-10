@@ -12,6 +12,10 @@ class ArticlesBootstrap(
     val articlesRepository: ArticlesRepository
 ) : ApplicationListener<ContextRefreshedEvent> {
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
+        populateDummyArticles()
+    }
+
+    fun populateDummyArticles() {
         val articles = generateDummyArticles()
         articles.forEach {
             articlesRepository.save(it)
