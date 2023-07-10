@@ -10,4 +10,6 @@ import java.time.LocalDate
 interface ArticlesRepository: JpaRepository<Article, Long> {
 
     fun findAllByDate(date: LocalDate, sort: Sort): List<Article>
+
+    fun findAllByDate(date: LocalDate): List<Article>
 }
