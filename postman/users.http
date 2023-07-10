@@ -47,4 +47,3 @@ Content-Type: application/json
 ### Deletes user
 DELETE localhost:8080/api/users/2
 Authorization: Bearer {{token}}
-
