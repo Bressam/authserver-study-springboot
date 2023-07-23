@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.jpa") version "1.7.22"
 }
 
-group = "br.pucpr"
+group = "dev.bressam"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
