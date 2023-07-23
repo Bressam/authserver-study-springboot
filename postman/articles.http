@@ -8,7 +8,7 @@ GET localhost:8080/api/articles?fromDate=2023-07-10
 GET localhost:8080/api/articles/today
 
 ### List Articles with sorting
-GET localhost:8080/api/articles?sortBy=name
+GET localhost:8080/api/articles?sortBy=content
 
 ### List Articles from Date + sorting
 GET localhost:8080/api/articles?fromDate=2023-07-10&sortBy=content

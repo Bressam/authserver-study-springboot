@@ -4,9 +4,6 @@ GET localhost:8080/api/articlesLists
 ### List Articles list by id
 GET localhost:8080/api/articlesLists/2
 
-#### List ARticles list by name
-GET localhost:8080/api/articlesLists/
-
 ### Update Articles list articles
 PATCH localhost:8080/api/articlesLists/2
 Content-Type: application/json
@@ -15,20 +12,25 @@ Authorization: Bearer {{token}}
 {
   "articles":[
     {
-      "id": 7,
+      "id": 3,
+      "date": "2023-07-08",
+      "title": "Article 3: article title",
+      "subtitle": null,
+      "content": "b Content data of article 3. Article 3 explores the issues regarding the problems without solutions on current days"
+    },
+    {
+      "id": 1,
       "date": "2023-06-30",
-      "title": "Article 2: article title",
-      "subtitle": "This is article 2 brief explanation",
-      "content": "Content data of article 2. Article 2 explores the issues regarding the problems without solutions on current days",
-      "articlesList": null
+      "title": "Article 1: article title",
+      "subtitle": "This is article 1 brief explanation",
+      "content": "a Content data of article 1. Article 1 explores the issues regarding the problems without solutions on current days"
     },
     {
       "id": 5,
       "date": "2023-07-10",
       "title": "Article 5: article title",
       "subtitle": null,
-      "content": "Content data of article 5. Article 5 explores the issues regarding the problems without solutions on current days",
-      "articlesList": null
+      "content": "e Content data of article 5. Article 5 explores the issues regarding the problems without solutions on current days"
     }
   ]
 }
@@ -39,7 +41,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
   {
-    "name": "Read later 5"
+    "name": "Favorites 2"
   }
 
 ### Creates Articles List
